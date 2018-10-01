@@ -32,9 +32,10 @@ export default class App extends Component<Props> {
       fetch(url, {
         method: 'POST',
         body: JSON.stringify({
-          message: this.message
+          message: this.msg
         }),
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
       }).then(function (response) {
