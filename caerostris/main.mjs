@@ -20,11 +20,7 @@ producer.on('error', function (error) {
 });
 
 const KafkaService = {
-    sendRecord: ({ data }, callback = () => { }) => {
-        if (!userId) {
-            return callback(new Error(`A userId must be provided.`));
-        }
-
+    sendRecord: (data, callback = () => { }) => {
         const buffer = new Buffer.from(JSON.stringify(data));
         // Create a new payload
         const record = [
@@ -49,5 +45,5 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.post('/inbound/:sourceId', (req, res) => {
     console.log(req.body);
-    res.send('Hello World!')
+    KafkaService.sendRecord(req.body, () => res.send('Hello World!'));
 });
