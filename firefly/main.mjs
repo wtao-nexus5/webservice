@@ -24,6 +24,7 @@ consumer.on('message', function (message) {
     var buf = new Buffer(message.value, 'binary');
     //var decodedMessage = JSON.parse(buf.toString());
     var decodedMessage = buf.toString();
+    io.emit('kafka', decodedMessage);
     console.log(decodedMessage);
 });
 
@@ -37,11 +38,14 @@ const port = 3032;
 
 app.use(bodyParser.json());
 
-app.listen(port, () => console.log(`firefly is listening on port ${port}!`));
+io.listen(port, () => console.log(`firefly is listening on port ${port}!`));
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log('+++++a user connected');
+    socket.on('disconnect', () => {
+        console.log('-----a user disconnected');
+    });
 });
 
