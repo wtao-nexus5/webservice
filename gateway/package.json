@@ -4,7 +4,7 @@
     "main": "main.mjs",
     "license": "MIT",
     "scripts": {
-        "start": "node main.js"
+        "start": "node --experimental-modules main.mjs"
     },
     "dependencies": {
         "express": "^4.16.3",

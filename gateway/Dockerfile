@@ -1,7 +1,7 @@
 FROM node:8
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -15,8 +15,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-# App binds to port 3031 so  use the EXPOSE instruction to have it mapped by the docker daemon:
-EXPOSE 3031
+# App binds to port 3031, 3032 so  use the EXPOSE instruction to have it mapped by the docker daemon:
+EXPOSE 3031 3032
 CMD [ "npm", "start" ]
 
 # Next
